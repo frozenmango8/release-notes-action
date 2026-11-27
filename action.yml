@@ -1,0 +1,31 @@
+name: Release notes
+description: Draft release notes from Conventional Commits since the previous tag.
+inputs:
+  from:
+    description: Base ref, exclusive. Defaults to the previous semver tag.
+    required: false
+    default: ''
+  to:
+    description: Head ref, inclusive. Defaults to the current commit.
+    required: false
+    default: ''
+  include-types:
+    description: Comma-separated commit types to include. Breaking changes are always included.
+    required: false
+    default: feat,fix,perf
+  create-release:
+    description: Open a draft GitHub release for the suggested version.
+    required: false
+    default: 'false'
+  token:
+    description: Token used when create-release is true.
+    required: false
+    default: ${{ github.token }}
+outputs:
+  notes:
+    description: Release notes as Markdown.
+  version:
+    description: Suggested next semantic version.
+runs:
+  using: node20
+  main: dist/index.js

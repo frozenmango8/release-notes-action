@@ -1,5 +1,7 @@
 import type { Commit } from './parse';
 
+export const EMPTY_NOTES = 'No notable changes.\n';
+
 const ORDER = ['feat', 'fix', 'perf'];
 
 const TITLES: Record<string, string> = {
@@ -14,8 +16,10 @@ export interface RenderOptions {
 }
 
 export function renderNotes(commits: Commit[], options: RenderOptions): string {
-  const visible = commits.filter((commit) => commit.breaking || options.types.includes(commit.type));
-  if (visible.length === 0) return 'No notable changes.\n';
+  const visible = commits.filter(
+    (commit) => commit.breaking || options.types.includes(commit.type),
+  );
+  if (visible.length === 0) return EMPTY_NOTES;
 
   const breaking = visible.filter((commit) => commit.breaking);
   const rest = visible.filter((commit) => !commit.breaking);

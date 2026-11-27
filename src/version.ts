@@ -28,7 +28,11 @@ function included(commit: Commit, types: string[]): boolean {
   return commit.breaking || types.includes(commit.type);
 }
 
-export function suggestVersion(previousTag: string | null, commits: Commit[], types: string[]): string {
+export function suggestVersion(
+  previousTag: string | null,
+  commits: Commit[],
+  types: string[],
+): string {
   const relevant = commits.filter((commit) => included(commit, types));
   const previous = previousTag ? parseVersion(previousTag) : null;
 

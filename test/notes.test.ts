@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { renderNotes } from '../src/notes';
+import { EMPTY_NOTES, renderNotes } from '../src/notes';
 import type { Commit } from '../src/parse';
 import { suggestVersion } from '../src/version';
 
@@ -88,7 +88,7 @@ describe('renderNotes', () => {
   });
 
   it('reports an empty range', () => {
-    expect(renderNotes([], { types, repoUrl: repo })).toBe('No notable changes.\n');
+    expect(renderNotes([], { types, repoUrl: repo })).toBe(EMPTY_NOTES);
   });
 });
 
